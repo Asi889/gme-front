@@ -1,10 +1,8 @@
 
 import { Avatar, Box, Button, Container, CssBaseline, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 import { Copyright } from '@material-ui/icons';
-import { Email } from '@material-ui/icons';
 import { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import logInRoute from '../routes/logInRoute';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
@@ -34,23 +32,16 @@ const LogIn = () => {
 
   const classes = useStyles();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const handleEmail = (e) => {
     setEmail(e.target.value)
-    console.log(email)
+    console.log(process.env)
+    console.log(process.env.REACT_APP_SERVER_URL)
   }
-  const handleFirstName = (e) => {
-    setFirstName(e.target.value)
-    console.log(firstName)
-  }
-  const handleLastName = (e) => {
-    setLastName(e.target.value)
-    console.log(lastName)
-  }
+  
+  
   const handlePassword = (e) => {
     setPassword(e.target.value)
     // console.log(password)
@@ -59,14 +50,13 @@ const LogIn = () => {
 
   const handleSubmit = async function (e) {
     e.preventDefault()
-    const u = { email, password }
     // const token = await signUp(u)
 
-    // const g = await logInRoute(email, password)
-    const res= await axios.post("http://localhost:3001/logIn", {email: email, password: password} )
-    console.log("shick");
-    
-    console.log(res.data.token);
+    console.log(process.env.REACT_APP_SERVER_URL);
+    const res= await axios.post(`${process.env.REACT_APP_SERVER_URL}/logIn`, {email: email, password: password} )
+    // "http://localhost:3001/logIn"
+    console.log(res);    
+    // console.log(process.env.SERVER_URL);
     console.log("shack");
     
     localStorage.setItem('auth-token', res.data.token)

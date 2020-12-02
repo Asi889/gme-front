@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 // import './App.css';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Feed from './components/Feed'
@@ -8,13 +7,11 @@ import { ThemeProvider } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import checkLoggedIn from './services/checkLoggedIn'
-import { CheckCircleSharp } from '@material-ui/icons';
 // import { theme } from './components/themeMaterial'
 
 const App = inject('profileList', 'profile')(observer((props) => {
 
-  const [userData, setUserData] = useState("");
+  // const [userData, setUserData] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogIn = function (bol) {
@@ -35,13 +32,15 @@ const App = inject('profileList', 'profile')(observer((props) => {
       console.log(token);
 
       const tokenRes = await axios.post(
-        "http://localhost:3001/tokenIsValid",
+        `${process.env.REACT_APP_SERVER_URL}/tokenIsValid`,
+        // "http://localhost:3001/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       )
       console.log(tokenRes.data)
       if (tokenRes.data) {
-        const userRes = await axios.get('http://localhost:3001',
+        const userRes = await axios.get(process.env.REACT_APP_SERVER_URL,
+          // 'http://localhost:3001'
           {
             headers: { 'x-auth-token': token },
           })
@@ -92,7 +91,7 @@ const App = inject('profileList', 'profile')(observer((props) => {
 
 
 
-  }, []);
+  });
 
   // console.log(userData);
 
@@ -109,9 +108,9 @@ const App = inject('profileList', 'profile')(observer((props) => {
 
           }
           <Switch>
-            <Route exact path='/' exact render={() => <Feed />} />
+            <Route  path='/' exact render={() => <Feed />} />
             <Route  path='/logIn' exact render={() => <LogIn />} />
-            <Route  path='/signUp' exact render={() => <SignUp logIn={handleLogIn} />} />
+            <Route  path='/signUp' exact render={() => <SignUp logInn={handleLogIn} />} />
           </Switch>
         </Router>
       </ThemeProvider>

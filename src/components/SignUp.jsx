@@ -66,7 +66,10 @@ const SignUp = (props) => {
     const user = { email, firstName, lastName, password, passwordCheck }
     // console.log(u);
     // signUpRoute(u)
-     await axios.post("http://localhost:3001/userSignUp", user )
+    console.log(user);
+    //  await axios.post(`http://localhost:3001/userSignUp`, user )
+     await axios.post(`${process.env.REACT_APP_SERVER_URL}/userSignUp`, user )
+    //  "http://localhost:3001/userSignUp"
     //  <Redirect to='/login' />
     setCheck(true)
 
