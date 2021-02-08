@@ -29,7 +29,8 @@ export default class ProfileStore {
         const token = authManager.getToken();
 
         // const token = localStorage.getItem("auth-token");
-        const userRes = await axios.get(process.env.REACT_APP_SERVER_URL,
+        const userRes = await axios.get('ec2-52-14-49-167.us-east-2.compute.amazonaws.com',
+        // const userRes = await axios.get(process.env.REACT_APP_SERVER_URL,
             {
                 headers: { 'x-auth-token': token },
             });

@@ -3,7 +3,8 @@ import axios from 'axios'
 export const getAllTheUsers = async (token) => {
     try {
         const users = await axios.get(
-            `${process.env.REACT_APP_SERVER_URL}/allUsers`,
+            `ec2-52-14-49-167.us-east-2.compute.amazonaws.com/allUsers`,
+            // `${process.env.REACT_APP_SERVER_URL}/allUsers`,
             { headers: { "x-auth-token": token } }
         )
         return users.data
