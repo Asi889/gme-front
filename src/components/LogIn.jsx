@@ -26,8 +26,9 @@ const LogIn = (props) => {
 
   const handleSubmit = async function (e) {
     e.preventDefault()
+   
 
-    const res = await axios.post(`ec2-52-14-49-167.us-east-2.compute.amazonaws.com/logIn`, { email: email, password: password })
+    const res = await axios.post(`ec2-52-14-49-167.us-east-2.compute.amazonaws.com/api/logIn`, { email: email, password: password })
     // const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/logIn`, { email: email, password: password })
     // "http://localhost:3001/logIn"
     localStorage.setItem('auth-token', res.data.token)
