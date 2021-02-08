@@ -1,13 +1,85 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.myGigshead{
+    text-align: center;
+    color: #7920A6;
+
+    /* margin: auto; */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.line{
+    display: inline-block;
+
+    color: #7920A6;
 }
+
+.mygigstoggle{
+    text-align: center;
+
+}
+
+.togglePushed{
+
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+.darkToggledPushed{
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    color: #73bfb8;
+}
+
+.toggleNotPushed{
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    color: #c0bcbc;
+    cursor: pointer;
+}
+.darkToggleNotPushed{
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    color: #c0bcbc;
+    cursor: pointer;
+}
+
+.head{
+    text-align: center;
+
+}
+.boomClass{
+    text-align: center;
+}
+#file-input{
+    display:  none;
+}
+
+.image-upload{
+    display: inline;
+}
+
+.mmn{
+    color: hotpink;
+    /* color */
+}
+
+
+.feedR{
+background-color: white;
+}
+
+.darkFeedR{
+background-color: #18191a;
+}
+
+.bbking{
+    color: white ;
+    border-bottom: hotpink;
+}
+
+/* .feedTitle{
+    margin: 20px
+} */

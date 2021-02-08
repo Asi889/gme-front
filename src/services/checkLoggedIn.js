@@ -9,7 +9,7 @@ const checkLoggedIn = async () => {
         localStorage.setItem('auth-token', '');
         token = ""
     }
-    console.log(token);
+    // console.log(token);
 
     const tokenRes = await axios.post(
         "http://localhost:3001/tokenIsValid",
@@ -22,15 +22,8 @@ const checkLoggedIn = async () => {
             {
                 headers: { 'x-auth-token': token },
             })
-        console.log(userRes.data)
+        // console.log(userRes.data)
         return (userRes.data, token)
-
-        // props.profilelist.getProfileList(userRes.data, token)
-
-
     }
-
-    // console.log(props.profilelist)
-
 };
 export default checkLoggedIn

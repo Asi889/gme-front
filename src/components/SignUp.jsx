@@ -1,11 +1,11 @@
 
 import { Avatar, Box, Button, Container, CssBaseline, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 import { Copyright } from '@material-ui/icons';
-import { Email } from '@material-ui/icons';
-import { PropTypes } from 'mobx-react';
+// import { Email } from '@material-ui/icons';
+// import { PropTypes } from 'mobx-react';
 import { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import signUpRoute from '../routes/signUpRoute'
+import {  Redirect } from 'react-router-dom';
+// import signUpRoute from '../routes/signUpRoute'
 import axios from "axios"
 
 
@@ -189,18 +189,7 @@ const SignUp = (props) => {
             </Button>
             {/* </Link> */}
 
-            <Grid container>
-              <Grid item xs>
-                {/* <Link href="#" variant="body2">
-                  Forgot password?
-                </Link> */}
-              </Grid>
-              <Grid item>
-                {/* <Link href="/login" variant="body2">
-                  {"Have an account? Sign In"}
-                </Link> */}
-              </Grid>
-            </Grid>
+            
           </form>
         </div>
         <Box mt={8}>

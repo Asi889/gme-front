@@ -3,142 +3,104 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Feed from './components/Feed'
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
-import { ThemeProvider } from '@material-ui/core';
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-// import { theme } from './components/themeMaterial'
+import NavBar from './components/NavBar';
+// import theme from './components/themeMaterial'
+// import darkTheme from './components/darkTheme'
+// import { useDarkMode } from './components/useDarkMode';
+// import { lightTheme } from './theme';
+// import Test from './components/Test'
+import AddGigCategory from './components/AddGigCategory';
+import MyGigs from './components/myGigs'
+import ProfilePage from './components/ProfilePage'
+import Chat from './components/Chat';
+// import tokenValidation from './services/tokenValidation'
+import authReducer from './services/authReducers';
+const authManager = new authReducer()
+// import { runInAction } from 'mobx';
+// import io from 'socket.io-client'
 
-const App = inject('profileList', 'profile')(observer((props) => {
 
-  // const [userData, setUserData] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleLogIn = function (bol) {
+
+
+// const defaltTheme = createMuiTheme({
+
+//   palette: {
+
+//     primary: {
+//       main: "#73bfb8",
+//       // main: "#7920A6",
+//     },
+
+//     secondary: {
+//       main: "#7920A6",
+//     }
+
+//   },
+// });
+
+// const darkTheme1 = createMuiTheme({
+//   palette: {
+//     type: "dark",
+//   },
+// });
+
+const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props) => {
+
+  const [loggedIn, setLoggedIn] = useState(authManager.isLoggedIn());
+
+  const handleLogIn = function () {
     setLoggedIn(true)
   }
 
+  
   useEffect(() => {
 
-    const check = async () => {
-
-
-      let token = localStorage.getItem("auth-token");
-
-      if (token === '' || token === null || token === undefined) {
-        localStorage.setItem('auth-token', '');
-        token = ""
+    (async () => {
+      if (loggedIn) {
+        // console.log("2")
+        await props.gigList.getGigList();
+        await props.profileList.getProfileList();
+        await props.profileList.getAllUsers()
+        await props.profileList.getReviewList()
       }
-      console.log(token);
+    })();
 
-      const tokenRes = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/tokenIsValid`,
-        // "http://localhost:3001/tokenIsValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      )
-      console.log(tokenRes.data)
-      if (tokenRes.data) {
-        const userRes = await axios.get(process.env.REACT_APP_SERVER_URL,
-          // 'http://localhost:3001'
-          {
-            headers: { 'x-auth-token': token },
-          })
-        console.log(userRes.data)
-          props.profileList.getProfileList(userRes.data)
-          setLoggedIn(true)
-        // return (userRes.data, token)
-
-        // props.profilelist.getProfileList(userRes.data, token)
-
-
-      }
-      // const g= await checkLoggedIn()
-      // console.log(g);
-
-      // if(g.token){
-      //   console.log(g.token);
-
-      // }
-    }
-    check()
-
-    // const checkL = async () => {
-
-    //   const token = localStorage.getItem("auth-token");
-
-    //   if (token === null) {
-    //     localStorage.setItem('auth-token', '');
-    //     token = ""
-    //   }
-
-    //   const tokenRes = await axios.post(
-    //     "http://localhost:3001/tokenIsValid",
-    //     null,
-    //     { headers: { "x-auth-token": token } }
-    //   )
-
-    //   if (tokenRes.data) {
-
-    //     const userRes = await axios.get('http://localhost:3001',
-    //       {
-    //         headers: { 'x-auth-token': token },
-    //       })
-
-    //     }
-    //   }
-    // checkL()
-
-
-
-  });
-
-  // console.log(userData);
+  }, [loggedIn]);
 
   return (
 
-    <div className="App">
-      <ThemeProvider>
-        <Router>
-          {loggedIn
+      <Router>
+        {
+          loggedIn
             ?
             (<Redirect to="/" />)
             :
             (<Redirect to="/logIn" />)
+        }
 
-          }
+        <div className="App">
+          {loggedIn && <NavBar />}
           <Switch>
-            <Route  path='/' exact render={() => <Feed />} />
-            <Route  path='/logIn' exact render={() => <LogIn />} />
-            <Route  path='/signUp' exact render={() => <SignUp logInn={handleLogIn} />} />
+            <Route exact path='/' exact render={() => <Feed logedin={loggedIn} />} />
+            <Route exact path="/addGig" exact render={() => <AddGigCategory />} />
+            <Route exact path="/myGigs" exact render={() => <MyGigs />} />
+            {/* <Route exact path="/test" exact render={() => <Test />} /> */}
+            <Route exact path='/logIn' exact render={() => <LogIn handleLogIn={handleLogIn} />} />
+            <Route exact path='/chat' exact render={() => <Chat />} />
+            <Route exact path='/profilePage' exact render={() => <ProfilePage />} />
+            <Route exact path='/signUp' exact render={() => <SignUp logInn={handleLogIn} />} />
           </Switch>
-        </Router>
-      </ThemeProvider>
-    </div>
+        </div>
+      </Router>
   );
 
 
 
 
 }))
-
-
-
-// function App() {
-//   return (
-
-//     <div className="App">
-//       <ThemeProvider>
-//       <Router>
-//         <Switch>
-//           <Route exact path='/' exact render={() => <Feed />} />
-//           <Route path='/login' exact render={() => <LogIn />} />
-//           <Route path='/signUp' exact render={() => <SignUp />} />
-//         </Switch>
-//       </Router>
-//       </ThemeProvider>
-//     </div>
-//   );
-// }
 
 export default App;
