@@ -18,6 +18,7 @@ import ProfilePage from './components/ProfilePage'
 import Chat from './components/Chat';
 // import tokenValidation from './services/tokenValidation'
 import authReducer from './services/authReducers';
+import NotFoundPage from './components/NotFoundPage';
 const authManager = new authReducer()
 // import { runInAction } from 'mobx';
 // import io from 'socket.io-client'
@@ -74,13 +75,13 @@ const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props
   return (
 
       <Router>
-        {
+        {/* {
           loggedIn
             ?
             (<Redirect to="/" />)
             :
             (<Redirect to="/logIn" />)
-        }
+        } */}
 
         <div className="App">
           {loggedIn && <NavBar />}
@@ -92,7 +93,8 @@ const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props
             <Route exact path='/logIn' exact render={() => <LogIn handleLogIn={handleLogIn} />} />
             <Route exact path='/chat' exact render={() => <Chat />} />
             <Route exact path='/profilePage' exact render={() => <ProfilePage />} />
-            <Route exact path='/signUp' exact render={() => <SignUp logInn={handleLogIn} />} />
+            <Route exact path='/signUp'  exact render={() => <SignUp logInn={handleLogIn} />} />
+            <Route path="*" component={NotFoundPage} />
           </Switch>
         </div>
       </Router>

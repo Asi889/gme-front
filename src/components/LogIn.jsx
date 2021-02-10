@@ -28,8 +28,8 @@ const LogIn = (props) => {
     e.preventDefault()
    
 
-    const res = await axios.post(`ip-172-31-20-199.us-east-2.compute.internal/logIn`, { email: email, password: password })
-    // const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/logIn`, { email: email, password: password })
+    // const res = await axios.post(`ip-172-31-20-199.us-east-2.compute.internal/logIn`, { email: email, password: password })
+    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/logIn`, { email: email, password: password })
     // "http://localhost:3001/logIn"
     localStorage.setItem('auth-token', res.data.token)
     props.handleLogIn()
