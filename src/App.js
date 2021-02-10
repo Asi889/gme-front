@@ -75,13 +75,13 @@ const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props
   return (
 
       <Router>
-        {/* {
+        {
           loggedIn
             ?
             (<Redirect to="/" />)
             :
             (<Redirect to="/logIn" />)
-        } */}
+        }
 
         <div className="App">
           {loggedIn && <NavBar />}
