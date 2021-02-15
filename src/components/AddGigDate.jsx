@@ -76,7 +76,7 @@ backgroundColor:"#8a8383",
 // location /api/ {
 //   proxy_set_header X-Forwarded-For $remote_addr;
 //   proxy_set_header Host $http_host;
-// proxy_pass http://172.31.20.199:3001;
+// proxy_pass http://localhost:3001;
 // }
 
 const AddGigDate = inject("profileList", "profile","theme")(observer((props) => {
