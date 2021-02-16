@@ -78,7 +78,7 @@ const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props
         {
           loggedIn
             ?
-            (<Redirect to="/" />)
+            (<Redirect to="/feed" />)
             :
             (<Redirect to="/logIn" />)
         }
@@ -86,7 +86,7 @@ const App = inject('gigList', 'profileList', 'profile', "theme")(observer((props
         <div className="App">
           {loggedIn && <NavBar />}
           <Switch>
-            <Route exact path='/' exact render={() => <Feed logedin={loggedIn} />} />
+            <Route exact path='/feed' exact render={() => <Feed logedin={loggedIn} />} />
             <Route exact path="/addGig" exact render={() => <AddGigCategory />} />
             <Route exact path="/myGigs" exact render={() => <MyGigs />} />
             {/* <Route exact path="/test" exact render={() => <Test />} /> */}
